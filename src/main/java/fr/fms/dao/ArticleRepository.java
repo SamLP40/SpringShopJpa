@@ -2,7 +2,9 @@ package fr.fms.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 // Requêtes HQL (hibernate query language) utilisables au niveau de l'appli
+import org.springframework.data.repository.query.Param;
 
 import fr.fms.entities.Article;
 
@@ -16,8 +18,10 @@ import fr.fms.entities.Article;
 		 * select * from ... where ... and ...=...;*/
 		public List<Article> findByBrandAndPriceGreaterThan(String brand, double price);
 		//Méthode qui va retourner les articles dont le prix est supérieur à ...
-
-		
+@Query("select A from Article A where A.brand like %:x% and A.price > :y")
+public List<Article> searchArticles(@Param("x") String keyword, @Param("y")double price);
+// Traduction en HQL d'une requête SQL complexe (requête permettant de rechercher par mots clés) 
+public List<Article> findByCategoryId(Long categoryId);
+// Permet d'obtenir tous les articles d'une catégorie
 	}
-	
 

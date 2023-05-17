@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Article implements Serializable {
@@ -15,6 +16,15 @@ public class Article implements Serializable {
 	private String brand;
 	private double price;
 	
+	@ManyToOne
+	private Category category; // Plusieurs articles sont liés à une catégorie en BDD
+	
+	public Article(String description, String brand, double price, Category category) {
+		this.brand = brand;
+		this.description = description;
+		this.price = price;
+		this.category = category;
+	}
 	public Article(String description, String brand, double price) {
 		super();
 		this.brand = brand;
