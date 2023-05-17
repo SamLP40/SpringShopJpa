@@ -23,5 +23,11 @@ public List<Article> searchArticles(@Param("x") String keyword, @Param("y")doubl
 // Traduction en HQL d'une requête SQL complexe (requête permettant de rechercher par mots clés) 
 public List<Article> findByCategoryId(Long categoryId);
 // Permet d'obtenir tous les articles d'une catégorie
+public List<Article> findByDescriptionAndPrice(String description, String brand);
+// Supprime un article via son ID
+public void deleteById(Long id);
+// Modifie un article via son ID
+public Article getById(Long id);
+
 	}
 

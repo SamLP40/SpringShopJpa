@@ -2,6 +2,7 @@ package fr.fms.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class Article implements Serializable {
 	private String brand;
 	private double price;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Category category; // Plusieurs articles sont liés à une catégorie en BDD
 	
 	public Article(String description, String brand, double price, Category category) {
@@ -44,6 +45,11 @@ public class Article implements Serializable {
 	
 	public String getDescription() {
 	return description;	
+	}
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", description=" + description + ", brand=" + brand + ", price=" + price
+				+ ", category=" + category + "]";
 	}
 
 }

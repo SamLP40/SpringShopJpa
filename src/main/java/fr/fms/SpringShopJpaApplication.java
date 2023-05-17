@@ -3,6 +3,10 @@ package fr.fms;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
+
+import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.fms.dao.ArticleRepository;
@@ -12,6 +16,7 @@ import fr.fms.entities.Category;
 
 @SpringBootApplication
 public class SpringShopJpaApplication implements CommandLineRunner {
+// private static Long ID = null;
 @Autowired
 private CategoryRepository categoryRepository;
 @Autowired
@@ -48,5 +53,25 @@ public void run(String...args) throws Exception { // création des articles
 	for (Article article : articleRepository.searchArticles("sung", 200)) {
 	System.out.println(article); //équivalent = findByKeyword
 	}
+
+	// articleRepository.deleteById((long) 1);
+	Hibernate.initialize(articleRepository.getById((long) 3));
+	articleRepository.save(new Article("T92", "Motorola", 0, garbage));
 }
+
 }
+
+/* 1.2) 1er moyen : select [Nom article] from article;
+ * 2e moyen : for(Article article : articleRepository.findArticleById(id, desc, price, Category) { system.out.println(article)}
+ * 
+ * 1.3) public List<Article> findByDescriptionAndBrand(String description, String brand); 
+ * 
+ * 1.4) Il suffit de faire drop database article et le tour est joué
+ * 
+ * Vraie méthode : public void deleteById(Long id);
+ * Dans l'appli : articleRepository.deleteById((long) id);
+ * 
+ * Il faut caster de int à long, car l'id n'est pas un int.
+ * 
+ * 1.5) 
+*/
