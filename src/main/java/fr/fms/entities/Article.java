@@ -32,6 +32,8 @@ public class Article implements Serializable {
 		this.price = price;
 	}
 	
+	public Article() {}
+	
 	public Long getId() {
 		return id;
 	}
