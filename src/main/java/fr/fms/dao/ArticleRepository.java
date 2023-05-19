@@ -1,12 +1,15 @@
 package fr.fms.dao;
 import java.util.List;
 
+import javax.persistence.OrderBy;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 // Requêtes HQL (hibernate query language) utilisables au niveau de l'appli
 import org.springframework.data.repository.query.Param;
 
 import fr.fms.entities.Article;
+import fr.fms.entities.Category;
 
 	public interface ArticleRepository extends JpaRepository<Article, Long> {
 		public List<Article> findByBrand(String brand); 
@@ -28,9 +31,9 @@ import fr.fms.entities.Article;
 		public void deleteById(Long id);
 		// Modifie un article via son ID
 		public Article getById(Long id);
-		// Trie par ordre croissant/décroissant (équivalent de Order by ... ASC/DESC)
-		//public Article orderByName(String name);
 		//public void updateArticle(long id, String name, String description, double price);
 		//void update(java.lang.String article, java.lang.Object object);
+//		@OrderBy
+//		public Article orderByCategoryId();
 	}
 

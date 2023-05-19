@@ -2,9 +2,13 @@ package fr.fms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
 import org.springframework.boot.CommandLineRunner;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.criteria.Order;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -29,18 +33,19 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String...args) throws Exception { // création des articles
-//		categoryRepository.save(new Category("Smartphone"));
-//		Category phone = categoryRepository.save(new Category("Phone"));
-//		Category iphone = categoryRepository.save(new Category("Iphone"));
-//		Category garbage = categoryRepository.save(new Category("Garbage"));
-//		articleRepository.save(new Article("8", "Samsung", 250, phone));
-//		articleRepository.save(new Article("S8", "Samsung", 200, phone));
-//		articleRepository.save(new Article("S9", "Samsung", 250, phone));
-//		articleRepository.save(new Article("14", "Iphone", 1250, iphone));
-//		articleRepository.save(new Article("20", "Iphone", 50000, iphone));
-//		articleRepository.save(new Article("10", "Iphone", 999, iphone));
-//		articleRepository.save(new Article("5", "Iphone", 665, iphone));
-//		articleRepository.save(new Article("3310", "Nokia", 2, garbage));
+		Category smartphone = categoryRepository.save(new Category("Smartphone"));
+		Category phone = categoryRepository.save(new Category("Phone"));
+		Category iphone = categoryRepository.save(new Category("Iphone"));
+		Category garbage = categoryRepository.save(new Category("Garbage"));
+		articleRepository.save(new Article("8", "Samsung", 250, phone));
+		articleRepository.save(new Article("S8", "Samsung", 200, phone));
+		articleRepository.save(new Article("S9", "Samsung", 250, phone));
+		articleRepository.save(new Article("14", "Iphone", 1250, iphone));
+		articleRepository.save(new Article("Galaxy", "Samsung", 199, smartphone));
+		articleRepository.save(new Article("20", "Iphone", 50000, iphone));
+		articleRepository.save(new Article("10", "Iphone", 999, iphone));
+		articleRepository.save(new Article("5", "Iphone", 665, iphone));
+		articleRepository.save(new Article("3310", "Nokia", 2, garbage));
 
 		//boucle qui va parcourir les articles et trier par prix/marque
 //		for(Article article : articleRepository.findByBrandAndPrice("Samsung", 250)) {
@@ -72,16 +77,20 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		
 		// FindById : méthode qui permet de mettre à jour le prix d'un article à partir d'un ID
 		//Modifier les propriétés de façon à ce que Spring mette à jour la BDD
-		Article a = articleRepository.findById((long)1).get(); // Accès a la BDD Article
-		a.setPrice(1000); // Modification du prix de l'article
-		Article e = articleRepository.findById((long)5).get(); // Accès a la BDD Article
-		e.setPrice(5000);
-		articleRepository.save(e);
-		for(Article article : articleRepository.findAll()) {
-			System.out.println(article);
-		}
+//		Article a = articleRepository.findById((long)1).get(); // Accès a la BDD Article
+//		a.setPrice(1000); // Modification du prix de l'article
+//		Article e = articleRepository.findById((long)5).get(); // Accès a la BDD Article
+//		e.setPrice(5000);
+//		articleRepository.save(e);
+//		for(Article article : articleRepository.findAll()) {
+//			System.out.println(article);
+//		}
+	//Ne pas mettre de corps aux méthodes utilisées via les repository (car méthodes abstraites)
+		
+//categoryRepository.findByName("sam");
+//articleRepository.orderByCategoryId();
 	}
-	
+
 }
 
 /* 1.2) 1er moyen : select [Nom article] from article;
@@ -96,5 +105,9 @@ public class SpringShopJpaApplication implements CommandLineRunner {
  * 
  * Il faut caster de int à long, car l'id n'est pas un int.
  * 
- * 1.5) 
+ * 1.5) //		Article a = articleRepository.findById((long)1).get(); // Accès a la BDD Article
+		//		a.setPrice(1000); // Modification du prix de l'article
+ * 
+ * 1.6) 
  */
+ 
