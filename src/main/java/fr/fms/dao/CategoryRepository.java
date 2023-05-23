@@ -9,7 +9,11 @@ import fr.fms.entities.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 // Méthode qui va chercher les noms de catégories en base (smartphone, phone, iphone, garbage)
+
+	public Category findByName(String name);
 	@OrderBy
-	public List <Category> findByName(String name);
+	public List <Category> findByOrderAsc();
+	@OrderBy
+	public List <Category> findByOrderDesc();
 }
  

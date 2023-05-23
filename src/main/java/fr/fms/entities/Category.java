@@ -48,6 +48,11 @@ public class Category{
 		this.articles = articles;
 	}
 
+	public Category(Long id, String name, Collection<Article> articles) {
+		this.id = id;
+		this.name = name;
+		this.articles = articles;
+	}
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + "]";
